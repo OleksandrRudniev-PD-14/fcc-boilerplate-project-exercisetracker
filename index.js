@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const cors = require('cors');
-require('dotenv').config();
+const cors = require('cors'); // not needed for tests anymore, should del cors from project?
+require('dotenv').config();   // also - update dependencies/packages?
 
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
@@ -33,7 +33,7 @@ app.post("/api/users", (req, res) => {
 
   users.push(newUser);
 
-  res.json({ // should be an object, not json?
+  res.json({
     username: newUser.username,
     _id: newUser._id
   });
