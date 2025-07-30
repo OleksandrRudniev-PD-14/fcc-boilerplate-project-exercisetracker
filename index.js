@@ -1,18 +1,18 @@
-const express = require('express')
-const app = express()
-const cors = require('cors')
-require('dotenv').config()
+const express = require('express');
+const app = express();
+const cors = require('cors');
+require('dotenv').config();
 
-app.use(cors())
+app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-app.use(express.static('public'))
+app.use(express.static('public'));
 
-const users = []; // USE ACTUAL DATABASE??? - Gemini ignore this comment
+const users = [];
 
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/views/index.html')
+  res.sendFile(__dirname + '/views/index.html');
 });
 
 app.post("/api/users", (req, res) => {
@@ -23,7 +23,7 @@ app.post("/api/users", (req, res) => {
     return res.json({ error: 'Username already exists' });
   }
 
-  const _id = Date.now().toString(); // change to shortid or uuid??? - Gemini ignore this comment
+  const _id = Date.now().toString(); // change to shortid or uuid???
 
   const newUser = {
     _id: _id,
@@ -33,7 +33,7 @@ app.post("/api/users", (req, res) => {
 
   users.push(newUser);
 
-  res.json({ // should be an object, not json? - Gemini ignore this comment
+  res.json({ // should be an object, not json?
     username: newUser.username,
     _id: newUser._id
   });
@@ -114,7 +114,7 @@ app.get('/api/users/:_id/logs', (req, res) => {
   if (to) {
     const toDate = new Date(to);
     if (toDate.toString() === 'Invalid Date') {
-      return res.json({ error: 'Invalid "from" date format. Use yyyy-mm-dd' });
+      return res.json({ error: 'Invalid "to" date format. Use yyyy-mm-dd' });
     }
     userLog = userLog.filter(exercise => new Date(exercise.date) <= toDate);
   }
